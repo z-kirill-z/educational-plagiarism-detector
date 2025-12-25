@@ -1,0 +1,3 @@
+"""
+Educational Plagiarism Detector package
+"""
