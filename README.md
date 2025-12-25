@@ -1,4 +1,5 @@
 ![Tests and Lint](https://github.com/z-kirill-z/educational-plagiarism-detector/actions/workflows/tests.yml/badge.svg)
+![Plagiarism Analysis](https://github.com/z-kirill-z/educational-plagiarism-detector/actions/workflows/plagiarism.yml/badge.svg)
 
 # Educational Plagiarism Detector
 
