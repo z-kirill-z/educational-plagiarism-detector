@@ -1,19 +1,22 @@
 import re
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 
-nltk.download("punkt")
-nltk.download("stopwords")
-
-STOPWORDS = set(stopwords.words("english"))
-
+STOPWORDS = {
+    "a", "an", "the", "is", "are", "was", "were",
+    "this", "that", "to", "of", "and", "in", "on",
+    "for", "with", "as", "by", "at"
+}
 
 def preprocess(text: str) -> str:
+    # lowercase
     text = text.lower()
-    text = re.sub(r"[^a-z\s]", "", text)
 
-    tokens = word_tokenize(text)
+    # remove punctuation
+    text = re.sub(r"[^\w\s]", "", text)
+
+    # tokenize
+    tokens = text.split()
+
+    # remove stopwords
     tokens = [t for t in tokens if t not in STOPWORDS]
 
     return " ".join(tokens)

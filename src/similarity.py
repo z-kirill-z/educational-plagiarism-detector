@@ -1,7 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import SequenceMatcher
-from itertools import combinations
 
 
 def cosine_sim(texts: list[str]) -> list[list[float]]:

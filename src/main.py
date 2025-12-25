@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 
 from loader import load_documents
@@ -16,7 +15,7 @@ def main():
     docs = load_documents(UPLOADS)
 
     names = list(docs.keys())
-    texts = [preprocess(docs[n]) for n in names]
+    texts = [preprocess(docs[name]) for name in names]
 
     cosine = cosine_sim(texts)
 
@@ -43,8 +42,10 @@ def main():
         "ngram_similarity": ngrams,
     }
 
-    with open(f"{RESULTS}/result_{timestamp}.json", "w") as f:
-        json.dump(result, f, indent=2)
+    save_json(
+        result,
+        f"{RESULTS}/result_{timestamp}.json"
+    )
 
     plot_similarity_matrix(cosine, names)
 
