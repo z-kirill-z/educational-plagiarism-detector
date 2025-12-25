@@ -1,10 +1,12 @@
 import re
 
+
 STOPWORDS = {
     "a", "an", "the", "is", "are", "was", "were",
     "this", "that", "to", "of", "and", "in", "on",
     "for", "with", "as", "by", "at"
 }
+
 
 def preprocess(text: str) -> str:
     # lowercase
