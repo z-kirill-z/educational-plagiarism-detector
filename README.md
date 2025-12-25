@@ -1,3 +1,5 @@
+![Tests and Lint](https://github.com/z-kirill-z/educational-plagiarism-detector/actions/workflows/tests.yml/badge.svg)
+
 # Educational Plagiarism Detector
 
 🎓 **Educational Plagiarism Detector** — учебный проект для обнаружения текстового сходства (потенциального плагиата) в студенческих работах с использованием классических алгоритмов обработки текста.
