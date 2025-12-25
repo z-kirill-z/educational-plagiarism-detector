@@ -4,17 +4,22 @@ from PyPDF2 import PdfReader
 SUPPORTED_EXTENSIONS = {".txt", ".pdf"}
 
 
-def load_documents(folder: str) -> dict:
+def load_documents(folder: Path) -> dict:
     documents = {}
 
-    for file in Path(folder).iterdir():
-        if file.suffix not in SUPPORTED_EXTENSIONS:
+    folder = Path(folder)
+
+    if not folder.exists():
+        raise FileNotFoundError(f"Directory not found: {folder}")
+
+    for file in folder.iterdir():
+        if file.suffix.lower() not in SUPPORTED_EXTENSIONS:
             continue
 
-        if file.suffix == ".txt":
+        if file.suffix.lower() == ".txt":
             text = file.read_text(encoding="utf-8", errors="ignore")
 
-        elif file.suffix == ".pdf":
+        elif file.suffix.lower() == ".pdf":
             reader = PdfReader(file)
             text = " ".join(page.extract_text() or "" for page in reader.pages)
 

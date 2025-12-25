@@ -1,0 +1,2 @@
+This is a simple test document.
+It contains some different content.

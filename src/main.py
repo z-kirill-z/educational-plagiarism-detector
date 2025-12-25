@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 
 from loader import load_documents
 from preprocessing import preprocess
@@ -7,12 +8,18 @@ from visualization import plot_similarity_matrix
 from utils import save_json
 
 
-UPLOADS = "uploads"
-RESULTS = "results"
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+UPLOADS_DIR = BASE_DIR / "uploads"
+RESULTS_DIR = BASE_DIR / "results"
 
 
 def main():
-    docs = load_documents(UPLOADS)
+    docs = load_documents(UPLOADS_DIR)
+
+    if not docs:
+        print("No documents found in uploads directory.")
+        return
 
     names = list(docs.keys())
     texts = [preprocess(docs[name]) for name in names]
@@ -33,7 +40,8 @@ def main():
         if i < j
     }
 
-    timestamp = datetime.now().isoformat()
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
     result = {
         "timestamp": timestamp,
         "files": names,
@@ -42,11 +50,8 @@ def main():
         "ngram_similarity": ngrams,
     }
 
-    save_json(
-        result,
-        f"{RESULTS}/result_{timestamp}.json"
-    )
-
+    result_path = RESULTS_DIR / f"result_{timestamp}.json"
+    save_json(result, result_path)
     plot_similarity_matrix(cosine, names)
 
 
